@@ -1,0 +1,4 @@
+fatigue
+headache
+fever
+shivering

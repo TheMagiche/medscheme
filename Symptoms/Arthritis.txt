@@ -1,0 +1,6 @@
+cough
+nosebleed
+nausea
+fatigue
+headache
+fever
