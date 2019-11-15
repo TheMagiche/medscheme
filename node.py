@@ -7,11 +7,11 @@ app = Flask(__name__)
 CORS(app)
 
 preprocess()
+engine = FindMyDisease()
+
 
 @app.route('/get-disease', methods=['POST'])
-def get_disease():
-    engine = FindMyDisease()
-    
+def get_disease():   
     values = request.get_json()
     if not values:
         response = {
@@ -31,15 +31,16 @@ def get_disease():
     
     try:
         get_patient_symptoms(pat_symptoms)
-        
         engine.reset()
         engine.run()
-        if disease_definition != None: 
+        
+        # print(engine.disease_definition)
+        if engine.disease_definition != None: 
             response = {
                 'message' : 'success',
-                'name': disease_definition['name'],
-                'description': disease_definition['description'],  
-                'treatment': disease_definition['treatment']
+                'name': engine.disease_definition['name'],
+                'description': engine.disease_definition['description'],  
+                'treatment': engine.disease_definition['treatment']
             }
             
             return jsonify(response), 201
@@ -56,7 +57,7 @@ def get_disease():
         
         return jsonify(response),  500
     finally:
-        engine.reset()  
+        engine.reset()
 
 @app.route('/get-other-diseases', methods=['POST'])
 def get_alt_disease():
@@ -108,8 +109,23 @@ def get_specific_disease(disease):
             'message': 'Disease not found'
         }
         return jsonify(response), 400   
-    
-      
+    disease_def = return_specific_disease(disease)
+    if disease_def != None: 
+        response = {
+            'message' : 'success',
+            'name': disease_def['name'],
+            'description': disease_def['description'],  
+            'treatment': disease_def['treatment']
+        }
+        return jsonify(response),  200  
+    else: 
+        response = {
+            'message': 'Disease not found'
+        }
+        return jsonify(response), 400 
+
+
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
     parser = ArgumentParser()

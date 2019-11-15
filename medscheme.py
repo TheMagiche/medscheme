@@ -7,13 +7,15 @@ import json
 
 
 diseases_list = []
+
 symptom_map = {}
+
 d_desc_map = {}
+
 d_treatment_map = {}
 
 patients_symptoms = [] 
 
-disease_definition = None
 
 def get_patient_symptoms(sym=[]):
     global patients_symptoms
@@ -82,9 +84,11 @@ preprocess()
 class Symptom(Fact):
     symptom = Field(list, mandatory=True)
     
+    
 class Disease():
     def __init__(self):
         self.disease_definition = OrderedDict()
+    
     
 class FindAltDisease():
     @staticmethod
@@ -107,18 +111,19 @@ class FindAltDisease():
 
         return probable_diseases_list
  
+ 
 class FindMyDisease(KnowledgeEngine, Disease):
         
     def return_disease(self, disease):
-        # global disease_definition
-        disease_definition = OrderedDict([('name',disease),('description',get_details(disease)), ('treatment', get_details(disease))])
-        return disease_definition 
+        self.disease_definition = OrderedDict([('name',disease),('description',get_details(disease)), ('treatment', get_details(disease))])
+        return self.disease_definition 
     
     @Rule()
     def startup(self):
         print("Welcome to medscheme")
         print("Lets see what ails you")
         self.declare(Symptom(symptom=patients_symptoms))      
+        # self.reset()
         
     @Rule(Symptom(symptom=get_disease_symptoms('Alzheimers')))
     def declare_alzheimers(self):
