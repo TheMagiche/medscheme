@@ -1,8 +1,8 @@
 cough
-nosebleed
-nausea
-fatigue
 headache
+depression
+fatigue
+anxiety
 fever
-shivering
+seizures
 fainting

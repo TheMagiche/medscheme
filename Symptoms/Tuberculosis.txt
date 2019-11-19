@@ -1,8 +1,8 @@
 cough
-nosebleed
+chest pain
 nausea
 fatigue
 headache
 fever
-shivering
-heavybreathing
+chills
+weight loss

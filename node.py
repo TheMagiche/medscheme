@@ -6,12 +6,11 @@ from medscheme import *
 app = Flask(__name__)
 CORS(app)
 
-preprocess()
-engine = FindMyDisease()
 
 
-@app.route('/get-disease', methods=['POST'])
-def get_disease():   
+@app.route('/api/get-disease', methods=['POST'])
+def get_disease():
+    preprocess()   
     values = request.get_json()
     if not values:
         response = {
@@ -28,13 +27,10 @@ def get_disease():
         return jsonify(response), 400
     
     pat_symptoms = values['patients_symptoms']
+    get_patient_symptoms(pat_symptoms)
     
     try:
-        get_patient_symptoms(pat_symptoms)
-        engine.reset()
         engine.run()
-        
-        # print(engine.disease_definition)
         if engine.disease_definition != None: 
             response = {
                 'message' : 'success',
@@ -57,9 +53,12 @@ def get_disease():
         
         return jsonify(response),  500
     finally:
+        print("reseting engine...")
         engine.reset()
+        print("Done")
+        engine.run()
 
-@app.route('/get-other-diseases', methods=['POST'])
+@app.route('/api/get-other-diseases', methods=['POST'])
 def get_alt_disease():
     
     values = request.get_json()
@@ -81,8 +80,7 @@ def get_alt_disease():
     pat_symptoms = values['patients_symptoms']
        
     try:
-        get_patient_symptoms(pat_symptoms)
-        alternate_diseases = FindAltDisease.identify_alt_disease()
+        alternate_diseases = FindAltDisease.identify_alt_disease(pat_symptoms)
         if alternate_diseases != None: 
             response = {
                 'message' : 'success',
@@ -100,9 +98,18 @@ def get_alt_disease():
         }
         return jsonify(response),  500
     finally:
-        pass
+        print("Done")
+
+@app.route('/api/diseases', methods=['GET'])
+def get_all_disease():
+    mydisease_list = get_all_diseases()    
+    response = {
+        'message': 'Success',
+        'disease_list': mydisease_list
+    }
+    return jsonify(response), 200
     
-@app.route('/diseases/<disease>', methods=['GET'])
+@app.route('/api/diseases/<disease>', methods=['GET'])
 def get_specific_disease(disease):
     if disease == '' or disease == None:
         response = {
@@ -127,6 +134,9 @@ def get_specific_disease(disease):
 
 
 if __name__ == '__main__':
+    preprocess()
+    engine = FindMyDisease()
+    engine.reset()
     from argparse import ArgumentParser
     parser = ArgumentParser()
     parser.add_argument('-p', '--port', type=int, default=3000)

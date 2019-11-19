@@ -1,8 +1,8 @@
 cough
-nosebleed
-nausea
-fatigue
-headache
-fever
+memory loss
+mumbling
+loss of consciousnes
+weak pulse
+mumbling
 shivering
-drooling
+drowsiness

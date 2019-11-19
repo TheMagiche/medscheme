@@ -1,4 +1,8 @@
-cough
-nosebleed
-nausea
+chest pains
+chest tightness
+chest pressure
+shortness of breath
+pain
+numbness
 fatigue
+coldness

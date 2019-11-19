@@ -1,5 +1,7 @@
-cough
-nosebleed
-nausea
+fatigue
+pain
 fever
-shivering
+pale stools
+dark urine
+vomiting
+weight loss

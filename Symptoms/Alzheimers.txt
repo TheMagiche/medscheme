@@ -1,7 +1,9 @@
-cough
-nosebleed
-nausea
-fatigue
-headache
-fever
-shivering
+mental decline
+difficulty thinking
+depression
+hallucination
+repeating words
+forgetfulness
+disorientation
+confusion
+memory loss

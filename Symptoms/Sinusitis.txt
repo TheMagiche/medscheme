@@ -1,2 +1,8 @@
+fatigue
+fever
+malaise
+swelling
+headache
+loss of smell
+pain
 cough
-shivering

@@ -1,8 +1,9 @@
 cough
-nosebleed
-nausea
+chest pain
+diffculty breathing
 fatigue
 headache
 fever
-shivering
+fast heart rate
 wheezing
+anxiety

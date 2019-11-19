@@ -1,3 +1,8 @@
-cough
-nosebleed
+headache
+vomiting
 nausea
+dizziness
+dryness
+cramps
+weakness
+fast heart rate

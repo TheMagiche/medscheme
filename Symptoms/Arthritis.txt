@@ -1,6 +1,7 @@
-cough
-nosebleed
-nausea
+pain 
+bumps
+malaise
 fatigue
-headache
-fever
+stifness
+redness
+swelling
